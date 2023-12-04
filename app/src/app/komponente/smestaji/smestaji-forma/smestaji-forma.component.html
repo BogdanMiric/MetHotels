@@ -1,0 +1,52 @@
+<!-- smestaji-forma.component.html -->
+<form (ngSubmit)="onSubmit()" #smestajForm="ngForm">
+    <div *ngIf="isPovecanRacun">
+        <p class="text-info h3">Cena dodatog smeštaja povećana je za {{ povecanjeRacuna }}€</p>
+    </div>
+    <div class="container mt-4">
+        <h2>Unos podataka smeštaja</h2>
+        <div class="form-group">
+            <label for="naziv">Naziv smeštaja:</label>
+            <input type="text" class="form-control" id="naziv" required minlength="6" ngModel name="naziv" #naziv="ngModel">
+            <span class="text-danger h6" *ngIf="!naziv.valid && naziv.touched">Naziv smeštaja mora sadržati više od 6 karaktera</span>
+        </div>
+        <div class="form-group">
+            <label for="tipSobe">Tip sobe:</label>
+            <input type="text" class="form-control" id="tipSobe" required minlength="6" ngModel name="tipSobe" #tipSobe="ngModel">
+            <span class="text-danger h6" *ngIf="!tipSobe.valid && tipSobe.touched">Tip sobe mora sadržati više od 6 karaktera</span>
+        </div>
+        <div class="form-group">
+            <label for="cena">Cena:</label>
+            <input type="number" class="form-control" id="cena" ngModel name="cena" #cena="ngModel">
+        </div>
+        <div class="form-group">
+            <label for="brojKreveta">Broj kreveta:</label>
+            <input type="number" class="form-control" id="brojKreveta" ngModel name="brojKreveta" #brojKreveta="ngModel">
+        </div>
+        <div class="form-group">
+            <label>Dodatne opcije:</label><br>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="klima" name="klima" ngModel>
+                <label class="form-check-label" for="klima">Klima</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="miniBar" name="miniBar" ngModel>
+                <label class="form-check-label" for="miniBar">Mini Bar</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="sauna" name="sauna" ngModel>
+                <label class="form-check-label" for="sauna">Sauna</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="tv" name="tv" ngModel>
+                <label class="form-check-label" for="tv">TV</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="wifi" name="wifi" ngModel>
+                <label class="form-check-label" for="wifi">Wi-Fi</label>
+            </div>
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-primary" [disabled]="!smestajForm.valid">Dodaj smeštaj</button>
+    </div>
+</form>

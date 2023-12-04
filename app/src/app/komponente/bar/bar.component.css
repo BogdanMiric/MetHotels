@@ -1,0 +1,11 @@
+.bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.opcija{
+    cursor: pointer;
+    user-select: none;
+}

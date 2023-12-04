@@ -1,0 +1,36 @@
+<!-- smestaji.component.html -->
+
+
+<h2>Lista smeštaja</h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Naziv</th>
+                <th>Tip sobe</th>
+                <th>Cena</th>
+                <th>Broj kreveta</th>
+                <th>Dodatne opcije</th>
+                <th>Rezerviši</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let smestaj of smestaji">
+                <td>{{ smestaj.id }}</td>
+                <td>{{ smestaj.naziv }}</td>
+                <td>{{ smestaj.tipSobe }}</td>
+                <td>{{ smestaj.cena }}€</td>
+                <td>{{ smestaj.brojKreveta }}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let opcija of smestaj.dodatneOpcije">{{ opcija }}</li>
+                    </ul>
+                </td>
+                <td class="text-center align-middle">
+                    <button class="btn btn-primary">Rezerviši</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
