@@ -9,6 +9,7 @@ import { SmestajiFormaComponent } from './komponente/smestaji/smestaji-forma/sme
 import { BarComponent } from './komponente/bar/bar.component';
 import { PreporukeComponent } from './komponente/preporuke/preporuke.component';
 import { ONamaComponent } from './komponente/o-nama/o-nama.component';
+import { RezervacijaComponent } from './komponente/smestaji/rezervacija/rezervacija.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ONamaComponent } from './komponente/o-nama/o-nama.component';
     SmestajiFormaComponent,
     BarComponent,
     PreporukeComponent,
-    ONamaComponent
+    ONamaComponent,
+    RezervacijaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Smestaj } from 'src/app/model/smestaj.interface';
+import { RoomService } from 'src/app/servisi/room.service';
 
 @Component({
   selector: 'app-smestaji-tabela',
@@ -9,5 +10,15 @@ import { Smestaj } from 'src/app/model/smestaj.interface';
 export class SmestajiTabelaComponent {
   @Input() smestaji: Smestaj[];
 
+  constructor(private roomService: RoomService){
+
+  }
+
+  rezervisi(smestaj: Smestaj){
+    this.roomService.toggleRezervacijaPolje();
+    this.roomService.odabraniSmestaj = smestaj;
+    console.log(smestaj.naziv);
+    console.log(smestaj.cena);
+  }
 
 }
