@@ -1,71 +1,78 @@
 import { Injectable } from '@angular/core';
 import { Smestaj } from 'src/app/model/smestaj.interface';
+import { RestService } from './rest.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  smestaji: Smestaj[] = []; 
-  rezervacijaPolje: boolean = false;
+  smestaji: Smestaj[] = [];
   odabraniSmestaj: Smestaj;
 
-  toggleRezervacijaPolje(){
-    this.rezervacijaPolje = !this.rezervacijaPolje;
+  //konstruktor
+  constructor(private restService: RestService) {
+    this.ucitajSmestaje();
   }
 
-  constructor() { 
-    this.smestaji = [
-      new Smestaj(
-        1,
-        'Dvokrevetna soba',
-        'Standardna soba',
-        80,
-        2,
-        ['Klima', 'TV']
-      ),
-      new Smestaj(
-        2,
-        'Porodični apartman',
-        'Apartman',
-        150,
-        4,
-        ['Klima', 'Mini bar', 'WiFi', 'Sauna']
-      ),
-      new Smestaj(
-        3,
-        'Luksuzna soba',
-        'Superior soba',
-        120,
-        2,
-        ['Klima', 'TV', ]
-      ),
-      new Smestaj(
-        4,
-        'Jednokrevetna soba',
-        'Standardna soba',
-        60,
-        1,
-        ['TV']
-      ),
-      new Smestaj(
-        5,
-        'Deluks apartman',
-        'Apartman',
-        200,
-        3,
-        ['Klima', 'TV', 'Sauna']
-      ),
-    ];
+  // kreiranje liste koja ce se emitovati
+  private _smestaji: BehaviorSubject<Smestaj[]> = new BehaviorSubject<Smestaj[]>([]);
+  public readonly smestaji$ = this._smestaji.asObservable();
+
+  ucitajSmestaje() {
+    this.restService.getItems().subscribe((data: any) => {
+      this.smestaji = Object.keys(data).map(key => {
+        const { id: dokumentId, naziv, tipSobe, cena, brojKreveta, dodatneOpcije } = data[key];
+        return new Smestaj(
+          key,
+          naziv,
+          tipSobe,
+          parseFloat(cena),
+          parseInt(brojKreveta),
+          dodatneOpcije || []
+        );
+      });
+      this._smestaji.next(this.smestaji); //emitovanje nove verzije liste
+    });
   }
 
   dodajNoviSmestaj(noviSmestaj: any): void {
     const id = this.smestaji.length + 1;
-    const smestaj = new Smestaj(id, noviSmestaj.naziv, noviSmestaj.tipSobe, noviSmestaj.cena, noviSmestaj.brojKreveta, noviSmestaj.dodatneOpcije);
-    this.smestaji.push(smestaj);
+    const smestaj = new Smestaj('', noviSmestaj.naziv, noviSmestaj.tipSobe, noviSmestaj.cena, noviSmestaj.brojKreveta, noviSmestaj.dodatneOpcije);
+    this.restService.addItem(smestaj).subscribe(() => {
+      console.log('Nova stavka uspešno dodata!');
+      this.ucitajSmestaje();
+    });
   }
 
-  getPrice(numberOfNights: number){
+  ukloniSmestaj(key: string) {
+    this.restService.deleteItem(key.toString()).subscribe(() => {
+      console.log('Smestaj uspešno obrisan!');
+      this.ucitajSmestaje();
+    });
+  }
+
+  azurirajSmestaj(key: string, azuriranSmestaj: any): void {
+    this.restService.updateItem(key, azuriranSmestaj).subscribe(() => {
+      this.ucitajSmestaje();
+    });
+  }
+
+  //ostale funkcije...
+
+  getPrice(numberOfNights: number) {
     return numberOfNights * this.odabraniSmestaj.cena;
   }
+
+  // show-hide
+  rezervacijaPolje: boolean = false;
+  azuriranjePolje: boolean = false;
+  toggleRezervacijaPolje() {
+    this.rezervacijaPolje = !this.rezervacijaPolje;
+  }
+  toggleAzuriranje(){
+    this.azuriranjePolje = !this.azuriranjePolje;
+  }
+
 
 }

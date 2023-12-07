@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './komponente/app-komponenta/app.component';
 import { SmestajiComponent } from './komponente/smestaji/smestaji.component';
@@ -10,6 +11,7 @@ import { BarComponent } from './komponente/bar/bar.component';
 import { PreporukeComponent } from './komponente/preporuke/preporuke.component';
 import { ONamaComponent } from './komponente/o-nama/o-nama.component';
 import { RezervacijaComponent } from './komponente/smestaji/rezervacija/rezervacija.component';
+import { AzuriranjeSmestajaComponent } from './komponente/smestaji/azuriranje-smestaja/azuriranje-smestaja.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { RezervacijaComponent } from './komponente/smestaji/rezervacija/rezervac
     BarComponent,
     PreporukeComponent,
     ONamaComponent,
-    RezervacijaComponent
+    RezervacijaComponent,
+    AzuriranjeSmestajaComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

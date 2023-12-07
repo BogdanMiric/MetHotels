@@ -6,11 +6,12 @@
       <p>Naziv smeštaja: {{ odabraniSmestaj.naziv }}</p>
       <p>Cena smeštaja: {{ ukupnaCena }}€</p>
       <label for="nights">Broj noćenja:</label>
-      <input type="number" id="nights" name="nights" min="1" value="1" [(ngModel)]="brojNoci" (ngModelChange)="promeniBrojNoci()">
+      <input type="number" id="nights" name="nights" min="1" value="1" [(ngModel)]="brojNoci"
+        (ngModelChange)="promeniBrojNoci()">
     </div>
     <div class="buttons">
       <button class="btn btn-primary reserve-btn">Rezerviši</button>
-      <button class="btn btn-secondary cancel-btn" (click)="otkazi()">Otkaži</button>
+      <button class="btn btn-dark cancel-btn" (click)="otkazi()">Otkaži</button>
     </div>
   </div>
 </div>

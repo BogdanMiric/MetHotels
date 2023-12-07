@@ -10,27 +10,18 @@ export class SmestajiFormaComponent {
   @Output() dodajSmestaj: EventEmitter<any> = new EventEmitter();
   @ViewChild('smestajForm') smestajForm: NgForm;
 
-
-  naziv: string;
-  tipSobe: string;
-  cena: number;
-  brojKreveta: number;
   dodatneOpcije: string[];
-
   povecanjeRacuna: number;
   isPovecanRacun: boolean;
 
   constructor() {
-    this.naziv = '';
-    this.tipSobe = '';
-    this.cena = 0;
-    this.brojKreveta = 0;
     this.dodatneOpcije = [];
     this.povecanjeRacuna = 0;
     this.isPovecanRacun = false;
   }
 
   onSubmit(): void {
+
     if (this.smestajForm.valid) {
       this.povecanjeRacuna = 0;
       this.dodatneOpcije = [];
@@ -57,7 +48,6 @@ export class SmestajiFormaComponent {
         this.povecanjeRacuna += 5;
       }
 
-      //Povecanje racuna na dodatne opcije
       if(this.dodatneOpcije.length !== 0){
         this.isPovecanRacun = true;
       }
@@ -75,6 +65,5 @@ export class SmestajiFormaComponent {
     } else {
       console.log('Forma nije validna. Molimo popunite ispravno sva polja.');
     }
-
   }
 }
