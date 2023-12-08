@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './komponente/app-komponenta/app.component';
 import { SmestajiComponent } from './komponente/smestaji/smestaji.component';
@@ -12,6 +13,14 @@ import { PreporukeComponent } from './komponente/preporuke/preporuke.component';
 import { ONamaComponent } from './komponente/o-nama/o-nama.component';
 import { RezervacijaComponent } from './komponente/smestaji/rezervacija/rezervacija.component';
 import { AzuriranjeSmestajaComponent } from './komponente/smestaji/azuriranje-smestaja/azuriranje-smestaja.component';
+
+const routes: Routes = [
+  { path: 'smestaji', component: SmestajiComponent },
+  { path: 'o-nama', component: ONamaComponent },
+  { path: 'preporuke', component: PreporukeComponent },
+  { path: '', redirectTo: '/smestaji', pathMatch: 'full' },
+];
+
 
 @NgModule({
   declarations: [
@@ -28,8 +37,10 @@ import { AzuriranjeSmestajaComponent } from './komponente/smestaji/azuriranje-sm
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    [RouterModule.forRoot(routes)]
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

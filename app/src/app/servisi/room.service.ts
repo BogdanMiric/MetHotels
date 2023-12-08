@@ -21,18 +21,26 @@ export class RoomService {
 
   ucitajSmestaje() {
     this.restService.getItems().subscribe((data: any) => {
-      this.smestaji = Object.keys(data).map(key => {
-        const { id: dokumentId, naziv, tipSobe, cena, brojKreveta, dodatneOpcije } = data[key];
-        return new Smestaj(
-          key,
-          naziv,
-          tipSobe,
-          parseFloat(cena),
-          parseInt(brojKreveta),
-          dodatneOpcije || []
-        );
-      });
-      this._smestaji.next(this.smestaji); //emitovanje nove verzije liste
+
+      if (data) {
+        this.smestaji = Object.keys(data).map(key => {
+          const { id: dokumentId, naziv, tipSobe, cena, brojKreveta, dodatneOpcije } = data[key];
+          return new Smestaj(
+            key,
+            naziv,
+            tipSobe,
+            parseFloat(cena),
+            parseInt(brojKreveta),
+            dodatneOpcije || []
+          );
+        });
+        this._smestaji.next(this.smestaji); //emitovanje nove verzije liste
+      } else {
+        this.smestaji = [];
+        this._smestaji.next(this.smestaji);
+        console.log('nema podataka u bazi');
+      }
+
     });
   }
 
@@ -70,7 +78,7 @@ export class RoomService {
   toggleRezervacijaPolje() {
     this.rezervacijaPolje = !this.rezervacijaPolje;
   }
-  toggleAzuriranje(){
+  toggleAzuriranje() {
     this.azuriranjePolje = !this.azuriranjePolje;
   }
 

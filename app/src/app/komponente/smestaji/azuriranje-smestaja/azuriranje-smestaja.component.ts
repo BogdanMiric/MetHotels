@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter, ViewChild, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RoomService } from 'src/app/servisi/room.service';
-import { Smestaj } from 'src/app/model/smestaj.interface';
 
 @Component({
   selector: 'app-azuriranje-smestaja',

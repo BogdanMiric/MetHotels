@@ -1,5 +1,5 @@
 export class Smestaj {
-  key: string; // Dodati atribut key
+  key: string;
   naziv: string;
   tipSobe: string;
   cena: number;
@@ -7,14 +7,14 @@ export class Smestaj {
   dodatneOpcije: string[];
 
   constructor(
-    key: string, // Dodati key kao prvi argument konstruktora
+    key: string,
     naziv: string,
     tipSobe: string,
     cena: number,
     brojKreveta: number,
     dodatneOpcije: string[] 
   ) {
-    this.key = key; // Postaviti vrednost za key
+    this.key = key;
     this.naziv = naziv;
     this.tipSobe = tipSobe;
     this.cena = cena;

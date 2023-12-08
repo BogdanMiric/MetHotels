@@ -1,4 +1,3 @@
-<!-- smestaji-forma.component.html -->
 <form (ngSubmit)="onSubmit()" #smestajForm="ngForm">
     <div *ngIf="isPovecanRacun">
         <p class="text-info h3">Cena dodatog smeštaja povećana je za {{ povecanjeRacuna }}€</p>
@@ -48,6 +47,5 @@
         </div>
         <br><br>
         <button type="submit" class="btn btn-primary" [disabled]="!smestajForm.valid">Dodaj smeštaj</button>
-        <!-- <button type="submit" class="btn btn-primary">Dodaj smeštaj</button> -->
     </div>
 </form>

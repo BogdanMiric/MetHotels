@@ -1,7 +1,3 @@
-<app-bar (optionSelected)="showComponent($event)"></app-bar>
+<app-bar></app-bar>
 <br><br><br>
-<ng-container [ngSwitch]="selectedOption">
-    <app-smestaji *ngSwitchCase="'Smestaji'"></app-smestaji>
-    <app-preporuke *ngSwitchCase="'Preporuke'"></app-preporuke>
-    <app-o-nama *ngSwitchCase="'O nama'"></app-o-nama>
-</ng-container>
+<router-outlet></router-outlet>
