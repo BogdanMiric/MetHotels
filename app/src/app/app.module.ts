@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './komponente/app-komponenta/app.component';
 import { SmestajiComponent } from './komponente/smestaji/smestaji.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     [RouterModule.forRoot(routes)]
   ],
   exports: [RouterModule],

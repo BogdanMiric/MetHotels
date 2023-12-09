@@ -9,24 +9,33 @@ import { RoomService } from 'src/app/servisi/room.service';
 })
 export class SmestajiTabelaComponent {
   @Input() smestaji: Smestaj[];
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [5, 10, 15, 20];
 
-  constructor(private roomService: RoomService){}
+  constructor(private roomService: RoomService) { }
 
-  rezervisi(smestaj: Smestaj){
+  rezervisi(smestaj: Smestaj) {
     this.roomService.toggleRezervacijaPolje();
     this.roomService.odabraniSmestaj = smestaj;
     console.log(smestaj.naziv);
     console.log(smestaj.cena);
   }
 
-  ukloni(smestajKey: string){
+  ukloni(smestajKey: string) {
     this.roomService.ukloniSmestaj(smestajKey);
     console.log('obrisano');
   }
 
-  izmeni(smestaj: Smestaj){
+  izmeni(smestaj: Smestaj) {
     this.roomService.toggleAzuriranje();
     this.roomService.odabraniSmestaj = smestaj;
+  }
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.roomService.ucitajSmestaje();
   }
 
 }

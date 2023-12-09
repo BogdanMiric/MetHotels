@@ -12,7 +12,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let smestaj of smestaji">
+            <tr
+                *ngFor="let smestaj of smestaji | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
                 <td>{{ smestaj.naziv }}</td>
                 <td>{{ smestaj.tipSobe }}</td>
                 <td>{{ smestaj.cena }}€</td>
@@ -31,3 +32,5 @@
         </tbody>
     </table>
 </div>
+<pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+</pagination-controls>
